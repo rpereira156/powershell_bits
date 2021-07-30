@@ -10,4 +10,5 @@ $LocalUsers | foreach {$newUpn = $_.UserPrincipalName.Replace("old.upn.com","new
 Get-AzureADUser -All $true | ? {$_.UserPrincipalName -like '*new.upn.com'}  | Select DisplayName,UserPrincipalName,ObjectId | Export-Csv -Path D:\file.csv
 
 #Revoke old auth tokens so users are forced to use new UPN in previouly logged devices (and potentially avoid file sharing problems in Teams/OneDrive)
+#When in doubt, read https://masterandcmdr.com/2019/03/27/force-teams-to-sign-out/
 Revoke-AzureADUserAllRefreshToken -ObjectId 111111aaa2222bbbb3333ccccc444444
