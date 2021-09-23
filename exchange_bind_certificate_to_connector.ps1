@@ -24,6 +24,9 @@ Set-ReceiveConnector "{SERVER-NAME}\Default {SERVER-NAME}" -TlsCertificateName $
 <#
 Documentation used:
 https://docs.microsoft.com/en-us/exchange/troubleshoot/email-delivery/cannot-receive-mail-with-new-certificate
+https://docs.microsoft.com/en-us/microsoft-365/security/office-365-security/mail-flow-intelligence-in-office-365?view=o365-worldwide#error-code-450-44317-cannot-connect-to-remote-server
+https://practical365.com/configuring-the-tls-certificate-name-for-exchange-server-receive-connectors/
+https://www.signorellidenis.com/pt/falha-na-validacao-smtp-do-exchange-online-450-4-4-317-cannot-connect-to-remote-server/
 https://www.petenetlive.com/KB/Article/0001631
 https://www.azure365pro.com/replacing-send-connector-certificate/
 #>
