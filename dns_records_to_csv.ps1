@@ -1,4 +1,5 @@
 # Source https://chentiangemalc.wordpress.com/2018/10/17/extract-dns-records-to-csv-with-powershell/
+# To use: Get-AllDnsResourceRecords -DnsServer 8.8.8.8 | Export-Csv -NoTypeInformation -Path c:\support\DnsRecords.csv
 
 [CmdletBinding()]
 param(
