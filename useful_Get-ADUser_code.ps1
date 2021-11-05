@@ -3,3 +3,6 @@ $var = Get-ADUser -Filter * -SearchBase "OU=" -Properties * | Select-Object mail
 
 #Get a list of all users in the domain with the lastLogon attribute
 Get-ADUser -Filter * -Properties Name,LastLogon,Displayname, EmailAddress, Title | select Name,@{Name=’LastLogon’;Expression={[DateTime]::FromFileTime($_.LastLogon)}},DisplayName, EmailAddress, Title | Export-CSV “C:\temp\Email_Addresses.csv”
+
+# Get a list of all users in the domain using lastLogonDate (this attribute search on both lastLogon and lastLogonTimestamp and shows up the most recent)
+Get-ADUser -Filter {((Enabled -eq $true))} -Properties LastLogonDate | select samaccountname, Name, lastLogonTimestamp | Sort-Object lastLogonTimestamp | Export-CSV "C:\temp\users_lasLogonDate.csv"
