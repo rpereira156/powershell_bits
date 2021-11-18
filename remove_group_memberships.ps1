@@ -1,5 +1,6 @@
 #Source https://serverfault.com/questions/601813/powershell-finding-all-of-users-group-memberships-and-kicking-it-out-of-them
 #Removes user from all groups that he is a member of.
+#Needs improvment since the user must remain a member of at least one group (primary group)
 
 # 1. Retrieve the user in question:
 $User = Get-ADUser "username" -Properties memberOf
