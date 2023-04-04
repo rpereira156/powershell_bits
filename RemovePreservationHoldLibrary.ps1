@@ -1,7 +1,7 @@
 <# Many thanks to
 https://www.reddit.com/r/Office365/comments/r1420f/exclude_a_users_onedrive_from_a_retention_policy/
-and
 https://www.sharepointdiary.com/2021/10/how-to-delete-files-from-preservation-hold-library.html
+https://www.sharepointdiary.com/2019/04/empty-recycle-bin-onedrive-for-business-powershell.html
 #>
 
 # Connect to the Security & Compliance section
@@ -22,6 +22,12 @@ Connect-PnPOnline -Url $SiteURL
 Get-PnPList -Identity $ListName | Get-PnPListItem -PageSize 100 -ScriptBlock {
     Param($items) Invoke-PnPQuery } | ForEach-Object { $_.Recycle() | Out-Null
 }
+
+#empty first stage recycle bin in onedrive for business site
+Get-PnPRecycleBinItem -FirstStage -RowLimit 5000 | Clear-PnpRecycleBinItem -Force
+ 
+#PowerShell to empty 2nd Stage recycle bin in onedrive for business
+Get-PnPRecycleBinItem -SecondStage -RowLimit 5000 | Clear-PnpRecycleBinItem -Force
 
 # Remove the exception
 Set-RetentionCompliancePolicy -Identity "OneDrive for Business" -RemoveOneDriveLocationException $SiteURL
