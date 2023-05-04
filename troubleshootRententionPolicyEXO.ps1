@@ -2,6 +2,8 @@
 # My sincere thanks to
 # https://o365info.com/manage-retention-policy-by-using/
 # https://office365itpros.com/2018/12/10/reporting-the-managed-folder-assistant/
+# https://techcommunity.microsoft.com/t5/exchange-team-blog/troubleshooting-compliance-retention-policies-in-exchange-online/ba-p/3754209
+# https://techcommunity.microsoft.com/t5/exchange-team-blog/troubleshooting-retention-policies-in-exchange-online/ba-p/3750197
 
 Connect-ExchangeOnline
 # Make sure that the retention policy is set as expected
