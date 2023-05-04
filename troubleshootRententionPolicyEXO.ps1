@@ -33,4 +33,4 @@ ForEach ($M in $Mbx) {
 $Report | Select User, LastProcessed, ItemsDeleted
 
 # Force start of MFA assistant in the mailbox if needed
-Start-ManagedFolderAssistant -Identity johndoe@company.com -FullCrawl
+Start-ManagedFolderAssistant -Identity johndoe@company.com -FullCrawl -AggMailboxCleanup
