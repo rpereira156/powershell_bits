@@ -44,7 +44,7 @@ Get-MailboxFolderStatistics -Identity johndoe@company.com -IncludeOldestAndNewes
 Start-ManagedFolderAssistant -Identity johndoe@company.com -FullCrawl -AggMailboxCleanup
 
 # If you need to forcefully delete items older than x days on a mailbox
-# Bear in mind that since the marketingcloudbcc mailbox was at capacity, the command took a long time to run and timed out due to throttling policies on the EXO.
+# Bear in mind that if the mailbox is at full capacity, the command can take a long time to run and might time out due to throttling policies on the EXO.
 # But not to worry, you can simply execute the command again.
 $Days=100
 $date = (get-date).AddDays( - ($Days)).ToString("MM/dd/yyyy")
