@@ -4,6 +4,8 @@
 # https://office365itpros.com/2018/12/10/reporting-the-managed-folder-assistant/
 # https://techcommunity.microsoft.com/t5/exchange-team-blog/troubleshooting-compliance-retention-policies-in-exchange-online/ba-p/3754209
 # https://techcommunity.microsoft.com/t5/exchange-team-blog/troubleshooting-retention-policies-in-exchange-online/ba-p/3750197
+# https://learntechfuture.com/2018/08/10/find-oldest-email-in-a-exchange-mailbox/
+# https://www.exchangeitup.net/2017/01/exchange-search-mailbox-delete-more.html
 
 Connect-ExchangeOnline
 # Make sure that the retention policy is set as expected
@@ -34,5 +36,16 @@ ForEach ($M in $Mbx) {
   }
 $Report | Select User, LastProcessed, ItemsDeleted
 
+# In case you need to extract a report with the age of the items on the mailbox
+# This will give you a .csv, apply filter as needed
+Get-MailboxFolderStatistics -Identity johndoe@company.com -IncludeOldestAndNewestItems | select Identity, Name, FolderPath, ItemsInFolder, FolderSize, OldestItemReceivedDate | Export-Csv c:\temp\mbxStats.csv -NoTypeInformation
+
 # Force start of MFA assistant in the mailbox if needed
 Start-ManagedFolderAssistant -Identity johndoe@company.com -FullCrawl -AggMailboxCleanup
+
+# If you need to forcefully delete items older than x days on a mailbox
+# Bear in mind that since the marketingcloudbcc mailbox was at capacity, the command took a long time to run and timed out due to throttling policies on the EXO.
+# But not to worry, you can simply execute the command again.
+$Days=100
+$date = (get-date).AddDays( - ($Days)).ToString("MM/dd/yyyy")
+Search-Mailbox -Identity johndoe@company.com -SearchQuery received<=$date -DeleteContent -Force -ErrorAction Stop -WarningAction SilentlyContinue
