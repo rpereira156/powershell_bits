@@ -16,7 +16,7 @@ $ListName = "Preservation Hold Library"
 Set-RetentionCompliancePolicy -Identity "OneDrive for Business" -AddOneDriveLocationException $SiteURL
 
 #Connect to the tenant, passing the user's private OneDrive URL as an parameter
-Connect-PnPOnline -Url $SiteURL
+Connect-PnPOnline -Url $SiteURL -Interactive
 
 # Clean the Preservation Hold Library
 Get-PnPList -Identity $ListName | Get-PnPListItem -PageSize 100 -ScriptBlock {
