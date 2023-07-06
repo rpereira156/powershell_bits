@@ -15,7 +15,7 @@ $servers = Get-Content $ServerList
 $ServiceName =  @{ Name = 'ServiceName'; Expression = {$_.Name}}
 $ServiceDisplayname = @{ Name = 'Service DisplayName';  Expression = {$_.Caption}}
 
-# Querioes each servers and appends the results to a .csv, else it fails
+# Queries each servers and appends the results to a .csv, else it fails
 foreach ($server in $servers) {
     try {
 	$result = Invoke-Command $server -ScriptBlock {
