@@ -1,4 +1,6 @@
-# Usage .\GetServices.ps1 -ServerList serverL.txt
+# Many thanks to https://adamtheautomator.com/powershell-foreach/
+# and https://www.commandline.ninja/use-powershell-to-find-windows-svcs-configured-to-run-as-another-user/
+# Usage .\GetServicesRunAs.ps1 -ServerList serverL.txt
 
 # Set script parameter
 param(
@@ -16,8 +18,8 @@ $ServiceDisplayname = @{ Name = 'Service DisplayName';  Expression = {$_.Caption
 # Querioes each servers and appends the results to a .csv, else it fails
 foreach ($server in $servers) {
     try {
-		$result = Invoke-Command $servers -ScriptBlock {
-			Get-CimInstance -Class Win32_Service -filter "StartName != 'LocalSystem' AND NOT StartName LIKE 'NT Authority%' " } | Select-Object SystemName, $ServiceName, $ServiceDisplayname, StartMode, StartName, State | Export-Csv "C:\temp\ScheduledTaskExportTest.csv" -NoTypeInformation -Append
+	$result = Invoke-Command $server -ScriptBlock {
+	Get-CimInstance -Class Win32_Service -filter "StartName != 'LocalSystem' AND NOT StartName LIKE 'NT Authority%' " } | Select-Object SystemName, $ServiceName, $ServiceDisplayname, StartMode, StartName, State | Export-Csv "C:\temp\ScheduledTaskExportTest.csv" -NoTypeInformation -Append
     }
     catch {
         Write-Output "$server - $($_.Exception.Message)"
