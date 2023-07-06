@@ -19,7 +19,7 @@ $ServiceDisplayname = @{ Name = 'Service DisplayName';  Expression = {$_.Caption
 foreach ($server in $servers) {
     try {
 	$result = Invoke-Command $server -ScriptBlock {
-	Get-CimInstance -Class Win32_Service -filter "StartName != 'LocalSystem' AND NOT StartName LIKE 'NT Authority%' " } | Select-Object SystemName, $ServiceName, $ServiceDisplayname, StartMode, StartName, State | Export-Csv "C:\temp\ScheduledTaskExportTest.csv" -NoTypeInformation -Append
+	Get-CimInstance -Class Win32_Service -filter "StartName != 'LocalSystem' AND NOT StartName LIKE 'NT Authority%' " } | Select-Object SystemName, $ServiceName, $ServiceDisplayname, StartMode, StartName, State | Export-Csv "C:\temp\ServicesExportTest.csv" -NoTypeInformation -Append
     }
     catch {
         Write-Output "$server - $($_.Exception.Message)"
