@@ -1,3 +1,4 @@
+# Sincere thanks to Kathy from M365scripts: https://m365scripts.com/exchange-online/bulk-import-contacts-office-365-powershell/ and the guys from O4635 info https://o365info.com/bulk-import-contacts-to-exchange-online-office-365-using-powershell-part-1-of-2/
 # Run in PowerShell 7
 # If the error "New-MailContact: Cannot bind argument to parameter 'Name' because it is an empty string." pops up, check the .csv. Excel added semicolons instead of just commas
 # Check the data provided by the user beforehand
